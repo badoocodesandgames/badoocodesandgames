@@ -1,0 +1,68 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+    
+    <Script file="SimpleBags.lua"/>
+    
+    <Frame name="SimpleBagsFrame" parent="UIParent" frameStrata="DIALOG" toplevel="true" enableMouse="true" movable="true" hidden="true">
+        <Size x="200" y="260"/> -- 200: Width of the frame in pixels, 260: Height of the frame in pixels
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-20" y="20"/> -- -20: Horizontal offset from bottom-right of UIParent, 20: Vertical offset from bottom-right of UIParent
+        </Anchors>
+        
+        <Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <BackgroundInsets>
+                <AbsInset left="4" right="4" top="4" bottom="4"/> -- 4: Distance in pixels the background is inset from each edge (left, right, top, bottom)
+            </BackgroundInsets>
+            <TileSize>
+                <AbsValue val="16"/> -- 16: Size in pixels of each background tile
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/> -- 16: Size in pixels of the border edge texture
+            </EdgeSize>
+            <Color r="0" g="0" b="0" a="1"/> -- 0: Red value (0-1), 0: Green value (0-1), 0: Blue value (0-1), 1: Alpha (opacity, 0-1)
+            <BorderColor r="0.2" g="0.8" b="0.2" a="1"/> -- 0.2: Red value (0-1), 0.8: Green value (0-1), 0.2: Blue value (0-1), 1: Alpha (opacity, 0-1)
+        </Backdrop>
+        
+        <Layers>
+            <Layer level="OVERLAY">
+                <FontString name="$parentTitle" inherits="GameFontNormal" text="Bags">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="-20" y="-10"/> -- 0: Horizontal offset from top center, -35: Vertical offset downward from top of frame
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        
+        <Frames>
+            <Frame name="SimpleBagsContainer" parent="SimpleBagsFrame">
+                <Size x="180" y="350"/> -- 180: Width of the container in pixels, 350: Height of the container in pixels
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="20" y="-50"/> -- 20: Horizontal offset from top-left of parent, -50: Vertical offset downward from top of parent
+                    <Anchor point="BOTTOMRIGHT" x="-20" y="40"/> -- -20: Horizontal offset from bottom-right of parent, 40: Vertical offset upward from bottom of parent
+                </Anchors>
+            </Frame>
+            <Button name="SimpleBagsItemButtonTemplate" inherits="ContainerFrameItemButtonTemplate,SecureActionButtonTemplate" virtual="true">
+    <!-- No additional attributes needed yet -->
+</Button>
+
+<!-- Use this template in your frame creation -->
+<Frame name="SimpleBagsContainer" parent="SimpleBagsFrame">
+    <!-- ... existing code ... -->
+</Frame>
+            <Button name="$parentBagsButton" inherits="UIPanelButtonTemplate">
+                <Size x="20" y="20"/> -- 20: Width of the button in pixels, 20: Height of the button in pixels
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="15" y="-10"/> -- 15: Horizontal offset from top-left of parent, -10: Vertical offset downward from top of parent
+                </Anchors>
+            </Button>
+
+            <Button name="$parentEmptyButton" inherits="UIPanelButtonTemplate">
+                <Size x="20" y="20"/> -- 20: Width of the button in pixels, 20: Height of the button in pixels
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentBagsButton" relativePoint="RIGHT" x="2" y="0"/> -- 2: Horizontal offset from right of BagsButton, 0: Vertical offset from right of BagsButton
+                </Anchors>
+            </Button>
+        </Frames>
+    </Frame>
+</Ui>
